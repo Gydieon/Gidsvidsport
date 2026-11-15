@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gideon Enejo | Video Editor in Abuja</title>
+<meta name="description" content="Gideon Enejo is a video editor and brand designer in Abuja, Nigeria. Watch reels made for Zelden Foods and get in touch.">
+<meta property="og:title" content="Gideon Enejo | Video Editor in Abuja">
+<meta property="og:description" content="Short-form videos, brand flyers and social content made with InShot, CapCut and Canva.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#F4F2F6">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎬</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1E1B24;
+    --paper: #F4F2F6;
+    --white: #FFFFFF;
+    --sauce: #C8232C;
+    --mustard: #F0B429;
+    --muted: #5B5766;
+    --line: #D9D5DF;
+    --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+    --body: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 4px; }
+
+  .wrap { width: min(1080px, 100% - 2.5rem); margin-inline: auto; }
+
+  /* Header */
+  header { padding-block: 1.25rem; }
+  header .wrap { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .brand { font-family: var(--display); font-weight: 700; font-size: 1.15rem; text-decoration: none; }
+  nav { display: flex; gap: 1.5rem; }
+  nav a { text-decoration: none; font-weight: 500; color: var(--muted); }
+  nav a:hover { color: var(--sauce); }
+
+  /* Hero */
+  .hero { padding-block: clamp(2.5rem, 7vw, 5rem) clamp(2.5rem, 6vw, 4rem); }
+  h1 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 7.5vw, 5.25rem);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    margin: 0 0 1.25rem;
+    max-width: 14ch;
+  }
+  .lede { font-size: clamp(1.1rem, 2.2vw, 1.3rem); max-width: 40rem; color: var(--muted); margin: 0 0 2rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: clamp(2.5rem, 6vw, 4rem); }
+  .btn {
+    display: inline-block;
+    padding: 0.8rem 1.4rem;
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid var(--ink);
+    transition: background-color 0.15s, color 0.15s;
+  }
+  .btn.primary { background: var(--sauce); border-color: var(--sauce); color: var(--white); }
+  .btn.primary:hover { background: var(--ink); border-color: var(--ink); }
+  .btn.secondary:hover { background: var(--ink); color: var(--white); }
+
+  /* Timeline: the tools shown as clips on an editing timeline */
+  .timeline {
+    position: relative;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 0.9rem 1rem 1rem;
+    overflow: hidden;
+  }
+  .ruler {
+    height: 10px;
+    margin: 0 0 0.75rem 4.5rem;
+    background: repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 22px);
+  }
+  .track { display: grid; grid-template-columns: 4.5rem 1fr; align-items: center; margin-bottom: 0.5rem; }
+  .track:last-of-type { margin-bottom: 0; }
+  .track-name { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
+  .lane { display: flex; background: var(--paper); border-radius: 8px; padding: 4px; min-height: 2.6rem; }
+  .clip {
+    display: flex; align-items: center;
+    padding: 0 0.8rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--white);
+    white-space: nowrap;
+  }
+  .clip.insho { background: var(--sauce); width: 34%; margin-left: 6%; }
+  .clip.capcut { background: #9E1B23; width: 38%; margin-left: 2%; }
+  .clip.canva { background: var(--ink); width: 52%; margin-left: 14%; }
+  .playhead-area { position: absolute; top: 0.9rem; bottom: 0; left: calc(1rem + 4.5rem); right: 1rem; pointer-events: none; }
+  .playhead {
+    position: absolute; top: 0; bottom: 0; left: 58%;
+    width: 2px; background: var(--mustard);
+    animation: scrub 2.6s cubic-bezier(.5,0,.2,1) 0.3s both;
+  }
+  .playhead::before {
+    content: ""; position: absolute; top: -2px; left: -5px;
+    width: 12px; height: 12px; background: var(--mustard);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+  }
+  @keyframes scrub { from { left: 0; } to { left: 58%; } }
+
+  /* Sections */
+  section { padding-block: clamp(2.25rem, 5vw, 3.5rem); border-top: 1px solid var(--line); }
+  .split { display: grid; grid-template-columns: 11rem 1fr; gap: 1.5rem 2.5rem; }
+  h2 { font-family: var(--display); font-weight: 700; font-size: 1.6rem; letter-spacing: -0.015em; line-height: 1.15; margin: 0; }
+  p { margin: 0 0 1rem; max-width: 40rem; }
+
+  /* Work */
+  .work-intro { color: var(--muted); margin-bottom: 1.5rem; }
+  .reels { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+  .reel { background: var(--white); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; }
+  .cover {
+    position: relative; display: block;
+    aspect-ratio: 9 / 13;
+    background: var(--sauce);
+    color: var(--white);
+    text-decoration: none;
+    overflow: hidden;
+  }
+  .reel:nth-child(2) .cover { background: var(--ink); }
+  .reel:nth-child(3) .cover { background: var(--mustard); color: var(--ink); }
+  .cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .cover-label {
+    position: absolute; left: 1.1rem; right: 1.1rem; bottom: 1rem;
+    font-family: var(--display); font-weight: 700; font-size: 1.6rem; line-height: 1.1; letter-spacing: -0.015em;
+  }
+  .cover img ~ .cover-label { color: var(--white); text-shadow: 0 1px 8px rgba(0,0,0,.55); }
+  .play {
+    position: absolute; top: 50%; left: 50%;
+    width: 4.5rem; height: 4.5rem; margin: -2.25rem 0 0 -2.25rem;
+    border-radius: 50%; background: var(--white);
+    transition: transform 0.15s;
+  }
+  .play::after {
+    content: ""; position: absolute; top: 50%; left: 50%;
+    width: 1.5rem; height: 1.7rem; margin: -0.85rem 0 0 -0.5rem;
+    background: var(--ink);
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+  }
+  .cover:hover .play { transform: scale(1.08); }
+  .reel-foot { padding: 0.9rem 1rem 1rem; }
+  .reel-btn { display: block; text-align: center; padding: 0.7rem 1rem; border-radius: 999px; background: var(--ink); color: var(--white); font-weight: 600; text-decoration: none; transition: background-color 0.15s; }
+  .reel-btn:hover { background: var(--sauce); }
+  .cover:has(img)::after { content: ""; position: absolute; inset: 45% 0 0 0; background: linear-gradient(to top, rgba(0,0,0,.65), transparent); }
+  .cover-label { z-index: 1; }
+
+  /* About */
+  dl { margin: 1.5rem 0 0; max-width: 40rem; }
+  dl div { display: grid; grid-template-columns: 8rem 1fr; gap: 1rem; padding-block: 0.7rem; border-top: 1px solid var(--line); }
+  dt { font-weight: 600; }
+  dd { margin: 0; color: var(--muted); }
+
+  /* Experience */
+  .role h3 { font-family: var(--display); font-size: 1.2rem; margin: 0; }
+  .role .meta { color: var(--muted); margin: 0.15rem 0 0.9rem; }
+  .role ul { margin: 0 0 1.5rem; padding-left: 1.2rem; max-width: 40rem; }
+  .role li { margin-bottom: 0.4rem; padding-left: 0.2rem; }
+  .earlier { color: var(--muted); font-size: 0.98rem; }
+
+  /* Contact */
+  .email { font-family: var(--display); font-weight: 700; font-size: clamp(1.5rem, 4.5vw, 2.6rem); letter-spacing: -0.02em; text-decoration-thickness: 3px; text-underline-offset: 6px; text-decoration-color: var(--sauce); word-break: break-word; }
+  .email:hover { color: var(--sauce); }
+  .contact-list { list-style: none; padding: 0; margin: 1.5rem 0 0; display: grid; gap: 0.35rem; }
+  .contact-list span { display: inline-block; min-width: 6.5rem; color: var(--muted); }
+
+  footer { border-top: 1px solid var(--line); padding-block: 1.5rem; color: var(--muted); font-size: 0.92rem; }
+
+  /* Tablet and phone */
+  @media (max-width: 820px) {
+    .split { grid-template-columns: 1fr; }
+    .reels {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 1rem;
+      margin-inline: -1.25rem;
+      padding: 0 1.25rem 0.5rem;
+      scroll-padding-inline: 1.25rem;
+    }
+    .reel { flex: 0 0 min(300px, 82vw); scroll-snap-align: start; }
+  }
+  @media (max-width: 520px) {
+    dl div { grid-template-columns: 1fr; gap: 0.1rem; }
+    .track { grid-template-columns: 3.6rem 1fr; }
+    .ruler { margin-left: 3.6rem; }
+    .playhead-area { left: calc(1rem + 3.6rem); }
+    .clip { padding: 0 0.5rem; font-size: 0.85rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .playhead { animation: none; }
+    .btn, .play, .reel-btn { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="#top">Gideon Enejo</a>
+    <nav aria-label="Main">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <h1>Gideon Enejo edits short videos for brands.</h1>
+    <p class="lede">Video editor and brand designer in Abuja. I make reels, flyers and social media content in InShot, CapCut and Canva.</p>
+    <div class="actions">
+      <a class="btn primary" href="#work">Watch my work</a>
+      <a class="btn secondary" href="mailto:enejogideon2004@gmail.com">Email me</a>
+    </div>
+
+    <div class="timeline">
+      <div class="ruler" aria-hidden="true"></div>
+      <div class="track">
+        <span class="track-name">Video</span>
+        <div class="lane"><span class="clip insho">InShot</span><span class="clip capcut">CapCut</span></div>
+      </div>
+      <div class="track">
+        <span class="track-name">Design</span>
+        <div class="lane"><span class="clip canva">Canva</span></div>
+      </div>
+      <div class="playhead-area" aria-hidden="true"><div class="playhead"></div></div>
+    </div>
+  </div>
+
+  <section id="work">
+    <div class="wrap">
+      <h2>Work</h2>
+      <p class="work-intro" style="margin-top:1rem">Three reels I edited for Zelden Foods. Start with the first one and keep going.</p>
+      <div class="reels">
+        <article class="reel">
+          <a class="cover" href="https://www.instagram.com/reel/DaiyErXNSUP/" target="_blank" rel="noopener" aria-label="Watch sample 1 on Instagram">
+            <img src="thumbs/reel-1.jpg" alt="" loading="lazy" onerror="this.remove()">
+            <span class="play" aria-hidden="true"></span>
+            <span class="cover-label">Check out my first sample</span>
+          </a>
+          <div class="reel-foot"><a class="reel-btn" href="https://www.instagram.com/reel/DaiyErXNSUP/" target="_blank" rel="noopener">Watch sample 1 on Instagram</a></div>
+        </article>
+        <article class="reel">
+          <a class="cover" href="https://www.instagram.com/reel/DZP5jmoN-g_/" target="_blank" rel="noopener" aria-label="Watch sample 2 on Instagram">
+            <img src="thumbs/reel-2.jpg" alt="" loading="lazy" onerror="this.remove()">
+            <span class="play" aria-hidden="true"></span>
+            <span class="cover-label">Next, see what else I made</span>
+          </a>
+          <div class="reel-foot"><a class="reel-btn" href="https://www.instagram.com/reel/DZP5jmoN-g_/" target="_blank" rel="noopener">Watch sample 2 on Instagram</a></div>
+        </article>
+        <article class="reel">
+          <a class="cover" href="https://www.instagram.com/reel/DYWsRxHt8Wg/" target="_blank" rel="noopener" aria-label="Watch sample 3 on Instagram">
+            <img src="thumbs/reel-3.jpg" alt="" loading="lazy" onerror="this.remove()">
+            <span class="play" aria-hidden="true"></span>
+            <span class="cover-label">And one more before you go</span>
+          </a>
+          <div class="reel-foot"><a class="reel-btn" href="https://www.instagram.com/reel/DYWsRxHt8Wg/" target="_blank" rel="noopener">Watch sample 3 on Instagram</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="split">
+        <h2>About</h2>
+        <div>
+          <p>I’m a video editor and brand designer based in Abuja. At Zelden Foods Limited I edit promotional videos, design flyers and come up with brand communication ideas. I also look after the IT side of production, from setting up devices to keeping editing software updated and project files organised.</p>
+          <p>I’m looking for a video editing role where I can turn ideas into content that grows a brand.</p>
+          <dl>
+            <div><dt>Video editing</dt><dd>Trimming and cutting, transitions, text overlays, captions, music and audio syncing, filters, colour adjustment, vertical and square formats</dd></div>
+            <div><dt>Design</dt><dd>Brand flyers, social media graphics, promotional posters</dd></div>
+            <div><dt>Tools</dt><dd>InShot, CapCut, Canva</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="split">
+        <h2>Experience</h2>
+        <div class="role">
+          <h3>Digital Brand and IT Operations Associate</h3>
+          <p class="meta">Zelden Foods Limited, Abuja, 2026</p>
+          <ul>
+            <li>Edited promotional and social media videos in InShot and CapCut, adding captions, music, transitions and effects.</li>
+            <li>Designed brand flyers and marketing graphics in Canva, keeping colours, fonts and style consistent.</li>
+            <li>Developed brand communication ideas and content concepts to promote the company’s products.</li>
+            <li>Handled IT tasks that supported video production, including device setup, editing software updates and file organisation.</li>
+          </ul>
+          <p class="earlier">Earlier: Administrative Officer, National Refugee Commission (NCFRMI), 2024 to 2025. Bachelor’s degree in Political Science and Diplomacy, Veritas University Abuja, 2020 to 2024.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="split">
+        <h2>Contact</h2>
+        <div>
+          <p>Have a video to cut or a brand to build content for? Send me a message.</p>
+          <a class="email" href="mailto:enejogideon2004@gmail.com">enejogideon2004@gmail.com</a>
+          <ul class="contact-list">
+            <li><span>Phone</span><a href="tel:+2347041322082">+234 704 132 2082</a></li>
+            <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/gideon-enejo" target="_blank" rel="noopener">linkedin.com/in/gideon-enejo</a></li>
+            <li><span>Instagram</span><a href="https://www.instagram.com/ohmybeefbacon/" target="_blank" rel="noopener">@ohmybeefbacon</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Gideon Enejo. Abuja, Nigeria.</div>
+</footer>
+
+</body>
+</html>
